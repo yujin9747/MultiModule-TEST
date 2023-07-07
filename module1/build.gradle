@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    // boot와 management 옆에 있는 버젼 정보를 삭제한다-> root gradle 파일에서 관리
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+group = 'com.example.multimodule.module1'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+// 개별 모듈을 빌드하기 위한 설정
+bootJar {
+    enabled = true
+}
+
+// repository 블록을 제거한다.
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

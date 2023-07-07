@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example.multimodule'
+// 기존에 있던 version = '0.0.1-SNAPSHOT'을 삭제한다. -> 해당 버젼은 개별 모듈에서 관리한다.
+
+configurations {
+    compileOnly {
+        // settings > compiler > annotation processor에서도 활성화 가능
+        extendsFrom annotationProcessor
+    }
+}
+
+allprojects {
+    // repositories 블록을 allprojects 블록 안으로 이동시킨다.
+    repositories {
+        mavenCentral()
+    }
+}
+java {
+    sourceCompatibility = '17'
+}
+
+// dependency와 test 블록으로 root gradle 파일에서 제거한다.
